@@ -12,7 +12,7 @@ def pre_deal(filename): #预处理 提取信息
 	qqInfoList=[]
 	f=open(filename,'r')
 	for line in f.readlines():
-		if(len(line.split())>2):
+		if(len(line.split())>1):
 			qqInfoList.append(line.strip())
 	return qqInfoList
 
