@@ -4,16 +4,15 @@ from __future__ import division
 import re
 from pylab import *
 import requests
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+import cchardet
+
 
 def pre_deal(filename): #预处理 提取信息
 	qqInfoList=[]
 	f=open(filename,'r')
 	for line in f.readlines():
 		if(len(line.split())>1):
-			qqInfoList.append(line.strip())
+			qqInfoList.append(line.strip().decode("GB18030","ignore"))
 	return qqInfoList
 
 def showInfo(qqInfoList): #显示信息
@@ -25,9 +24,9 @@ def sexCount(qqInfoList): #性别比例分析
 	boy=[]
 	other=[]
 	for item in qqInfoList:
-		if(u'女' in item):
+		if('女' in item):
 			girl.append(item)
-		elif(u'男' in item):
+		elif('男' in item):
 			boy.append(item)
 		else:
 			other.append(item)
@@ -73,7 +72,7 @@ def ageCount(qqInfoList):
 	unknown=0
 	for item in qqInfoList:
 		if(u'存在了' in item):
-			age=re.findall(r'\xb4\xe6\xd4\xda\xc1\xcb(.*?)\xc4\xea',item)[0]
+			age=re.findall(ur'存在了(.*?)年',item)[0]
 			#print age
 			age=int(age)
 			if(age>=time2010[0] and age<=time2010[1]):
