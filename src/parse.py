@@ -24,9 +24,9 @@ def sexCount(qqInfoList): #性别比例分析
 	boy=[]
 	other=[]
 	for item in qqInfoList:
-		if('女' in item):
+		if(u'女' in item):
 			girl.append(item)
-		elif('男' in item):
+		elif(u'男' in item):
 			boy.append(item)
 		else:
 			other.append(item)
